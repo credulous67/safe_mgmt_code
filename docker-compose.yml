@@ -1,0 +1,68 @@
+version: '3.7'
+
+services:
+  php-httpd:
+    build:
+      context: ./php-httpd
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 8080:80
+    volumes:
+      - "./DocumentRoot:/var/www/html:Z,ro"
+    entrypoint: ["tail", "-f", "/dev/null"]
+
+  mariadb:
+    image: mariadb:10
+    restart: unless-stopped
+    networks:
+      - backend
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    environment:
+      TZ: "Europe/London"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+      MYSQL_ROOT_PASSWORD: "rootpwd"
+      MYSQL_USER: 'smuser'
+      MYSQL_PASSWORD: 'smuser'
+      MYSQL_DATABASE: 'safe_mgmt'
+
+  phpmyadmin:
+    image: phpmyadmin:5-apache
+    networks:
+      - frontend
+      - backend
+    restart: unless-stopped
+    environment:
+      PMA_HOST: "mariadb"
+    ports:
+      - 8081:80
+
+  db_seeder:
+    build:
+      context: ./fedora
+      #    image: fedora:37
+    volumes:
+      - "./safe_mgmt.sql:/safe_mgmt.sql:Z,ro"
+      - "./db_seeder.sh:/db_seeder.sh:Z,ro"
+    entrypoint: [ "bash", "-c", "/db_seeder.sh" ]
+    networks:
+      - frontend
+      - backend
+
+  fedora:
+    build:
+      context: ./fedora
+      #    image: fedora:37
+    networks:
+      - frontend
+      - backend
+
+
+volumes:
+    mariadb-volume:
+
+networks:
+  frontend: {}
+  backend: {}

@@ -1,9 +1,18 @@
 version: '3.7'
 
 services:
-  php-httpd:
+  fedora:
     build:
-      context: ./php-httpd
+      context: ./fedora
+      #    image: fedora:37
+    networks:
+      - frontend
+      - backend
+
+# Build of php_httpd required fedora
+  php_httpd:
+    build:
+      context: ./php_httpd
     networks:
       - frontend
       - backend
@@ -12,6 +21,20 @@ services:
     volumes:
       - "./DocumentRoot:/var/www/html:Z,ro"
     entrypoint: ["tail", "-f", "/dev/null"]
+
+# Build of db_seeder required fedora
+  db_seeder:
+    build:
+      context: ./db_seeder
+    depends_on:
+      - mariadb
+    volumes:
+      - "./safe_mgmt.sql:/safe_mgmt.sql:Z,ro"
+      - "./db_seeder.sh:/db_seeder.sh:Z,ro"
+    entrypoint: [ "bash", "-c", "/db_seeder.sh" ]
+    networks:
+      - frontend
+      - backend
 
   mariadb:
     image: mariadb:10
@@ -33,31 +56,13 @@ services:
     networks:
       - frontend
       - backend
+    depends_on:
+      - mariadb
     restart: unless-stopped
     environment:
       PMA_HOST: "mariadb"
     ports:
       - 8081:80
-
-  db_seeder:
-    build:
-      context: ./fedora
-      #    image: fedora:37
-    volumes:
-      - "./safe_mgmt.sql:/safe_mgmt.sql:Z,ro"
-      - "./db_seeder.sh:/db_seeder.sh:Z,ro"
-    entrypoint: [ "bash", "-c", "/db_seeder.sh" ]
-    networks:
-      - frontend
-      - backend
-
-  fedora:
-    build:
-      context: ./fedora
-      #    image: fedora:37
-    networks:
-      - frontend
-      - backend
 
 
 volumes:

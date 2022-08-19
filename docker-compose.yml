@@ -20,9 +20,9 @@ services:
       - 8080:80
     volumes:
       - "./DocumentRoot:/var/www/html:Z,ro"
-    entrypoint: ["tail", "-f", "/dev/null"]
 
 # Build of db_seeder required fedora
+# db_seeder checks if database is empty, and if so, seeds it with initial schema & data
   db_seeder:
     build:
       context: ./db_seeder

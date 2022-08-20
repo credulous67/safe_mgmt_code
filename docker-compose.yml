@@ -4,7 +4,6 @@ services:
   fedora:
     build:
       context: ./fedora
-      #    image: fedora:37
     networks:
       - frontend
       - backend

@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Change this to your connection info.
-#include_once "config.php";
+#include_once "./config.php";
 $DATABASE_HOST = 'groucho.credulous.home';
 $DATABASE_USER = 'sm_user';
 $DATABASE_PASS = 'sm_user';
@@ -18,7 +18,7 @@ if ( !isset($_POST['username'], $_POST['password']) ) {
 	exit('Please fill both the username and password fields!');
 }
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE username = ?')) {
+if ($stmt = $con->prepare('SELECT id, password FROM user_ccounts WHERE username = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
 	$stmt->bind_param('s', $_POST['username']);
 	$stmt->execute();

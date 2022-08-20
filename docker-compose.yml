@@ -27,10 +27,6 @@ services:
       context: ./db_seeder
     depends_on:
       - mariadb
-    volumes:
-      - "./safe_mgmt.sql:/safe_mgmt.sql:Z,ro"
-      - "./db_seeder.sh:/db_seeder.sh:Z,ro"
-    entrypoint: [ "bash", "-c", "/db_seeder.sh" ]
     networks:
       - frontend
       - backend

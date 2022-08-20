@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0-1.fc35
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: groucho
--- Generation Time: Aug 17, 2022 at 10:44 AM
--- Server version: 5.5.68-MariaDB
+-- Host: mariadb
+-- Generation Time: Aug 20, 2022 at 02:53 PM
+-- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -20,27 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `safe_mgmt`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accounts`
---
-
-CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `roles` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `accounts`
---
-
-INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `roles`) VALUES
-(1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com', '');
 
 -- --------------------------------------------------------
 
@@ -68,7 +47,7 @@ CREATE TABLE `audit_log` (
   `media_type` int(11) NOT NULL COMMENT 'id from media',
   `key_type` int(11) NOT NULL COMMENT 'id from key_types',
   `hash` varchar(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -96,7 +75,7 @@ CREATE TABLE `keys` (
   `media_type_name` int(11) NOT NULL COMMENT 'id from media_types',
   `key_type_name` int(11) NOT NULL COMMENT 'id from key_types',
   `hash` varchar(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -107,7 +86,41 @@ CREATE TABLE `keys` (
 CREATE TABLE `key_types` (
   `id` int(11) NOT NULL,
   `key_type_name` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `key_types`
+--
+
+INSERT INTO `key_types` (`id`, `key_type_name`) VALUES
+(1, 'RLMK'),
+(2, 'LMK'),
+(3, 'ZMK (KEK)'),
+(4, 'ZPK (PEK, PTK, PPK)'),
+(5, 'CVK'),
+(6, 'PVK'),
+(7, 'HSM physical'),
+(8, 'Padlock physical'),
+(9, 'Rack physical'),
+(10, 'BACS KM/CO'),
+(11, 'Admin card'),
+(12, 'Operator card'),
+(13, 'Master card'),
+(14, 'Feature enablement'),
+(15, 'Shareholder card'),
+(16, 'Blank card'),
+(17, 'RFID'),
+(18, 'Password'),
+(19, 'Session keys'),
+(20, 'Bootstrap files'),
+(21, 'Veeam'),
+(22, 'BackupExec'),
+(23, 'Netbackup'),
+(24, 'N/A'),
+(25, 'Data domain'),
+(26, 'HSM RACC'),
+(27, 'HSM CTA'),
+(28, 'HSM HRK');
 
 -- --------------------------------------------------------
 
@@ -118,7 +131,7 @@ CREATE TABLE `key_types` (
 CREATE TABLE `media_types` (
   `id` int(11) NOT NULL,
   `media_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `media_types`
@@ -143,7 +156,7 @@ INSERT INTO `media_types` (`id`, `media_name`) VALUES
 CREATE TABLE `regions` (
   `id` int(11) NOT NULL,
   `region_name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `regions`
@@ -159,18 +172,6 @@ INSERT INTO `regions` (`id`, `region_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
---
-
-CREATE TABLE `roles` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `safes`
 --
 
@@ -178,7 +179,7 @@ CREATE TABLE `safes` (
   `id` int(11) NOT NULL,
   `safe_name` varchar(20) NOT NULL,
   `safe_location` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `safes`
@@ -201,7 +202,7 @@ INSERT INTO `safes` (`id`, `safe_name`, `safe_location`) VALUES
 CREATE TABLE `systems` (
   `id` int(11) NOT NULL,
   `systems_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `systems`
@@ -221,15 +222,44 @@ INSERT INTO `systems` (`id`, `systems_name`) VALUES
 (11, 'TED / TSS'),
 (12, 'TMS');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_accounts`
+--
+
+CREATE TABLE `user_accounts` (
+  `id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `user_roles` varchar(255) NOT NULL,
+  `account_disabled` tinyint(1) NOT NULL,
+  `password_expiry` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Dumping data for table `user_accounts`
+--
+
+INSERT INTO `user_accounts` (`id`, `username`, `password`, `email`, `user_roles`, `account_disabled`, `password_expiry`) VALUES
+(1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com', '', 0, '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_roles`
+--
+
+CREATE TABLE `user_roles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `accounts`
---
-ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `audit_log`
@@ -274,12 +304,6 @@ ALTER TABLE `regions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `safes`
 --
 ALTER TABLE `safes`
@@ -292,14 +316,20 @@ ALTER TABLE `systems`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `user_accounts`
 --
+ALTER TABLE `user_accounts`
+  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for table `accounts`
+-- Indexes for table `user_roles`
 --
-ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `user_roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
 --
 -- AUTO_INCREMENT for table `audit_log`
@@ -317,7 +347,7 @@ ALTER TABLE `keys`
 -- AUTO_INCREMENT for table `key_types`
 --
 ALTER TABLE `key_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `media_types`
@@ -332,12 +362,6 @@ ALTER TABLE `regions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `safes`
 --
 ALTER TABLE `safes`
@@ -350,6 +374,18 @@ ALTER TABLE `systems`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `user_accounts`
+--
+ALTER TABLE `user_accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user_roles`
+--
+ALTER TABLE `user_roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -357,9 +393,9 @@ ALTER TABLE `systems`
 -- Constraints for table `keys`
 --
 ALTER TABLE `keys`
-  ADD CONSTRAINT `regions` FOREIGN KEY (`region_name`) REFERENCES `regions` (`id`),
   ADD CONSTRAINT `key_types` FOREIGN KEY (`key_type_name`) REFERENCES `key_types` (`id`),
   ADD CONSTRAINT `media_types` FOREIGN KEY (`media_type_name`) REFERENCES `media_types` (`id`),
+  ADD CONSTRAINT `regions` FOREIGN KEY (`region_name`) REFERENCES `regions` (`id`),
   ADD CONSTRAINT `safes` FOREIGN KEY (`safe_name`) REFERENCES `safes` (`id`),
   ADD CONSTRAINT `systems` FOREIGN KEY (`system_name`) REFERENCES `systems` (`id`);
 COMMIT;

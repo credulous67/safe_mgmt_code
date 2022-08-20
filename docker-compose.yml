@@ -47,8 +47,8 @@ services:
       TZ: "Europe/London"
       MYSQL_ALLOW_EMPTY_PASSWORD: "no"
       MYSQL_ROOT_PASSWORD: "rootpwd"
-      MYSQL_USER: 'smuser'
-      MYSQL_PASSWORD: 'smuser'
+      MYSQL_USER: '_svc_sm'
+      MYSQL_PASSWORD: 'smpass'
       MYSQL_DATABASE: 'safe_mgmt'
 
   phpmyadmin:

@@ -28,8 +28,7 @@ if ($stmt = $con->prepare("SELECT id, password, password_expiry FROM user_accoun
 			$_SESSION['name'] = $_POST['username'];
 			$_SESSION['id'] = $id;
 			$_SESSION['password_expiry'] = $password_expiry;
-			$_SESSION['now'] = $now;
-			header('Location: password_change.php');
+			header('Location: password_expired.php');
 		} elseif (password_verify($_POST['password'], $password) && $password_expiry > $now ) {
                         // Verification success! User has logged-in!
                         // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
@@ -37,6 +36,7 @@ if ($stmt = $con->prepare("SELECT id, password, password_expiry FROM user_accoun
                         $_SESSION['loggedin'] = TRUE;
                         $_SESSION['name'] = $_POST['username'];
                         $_SESSION['id'] = $id;
+			$_SESSION['password_expiry'] = $password_expiry;
                         header('Location: main_menu.php');
                 } else {
 			// Incorrect password

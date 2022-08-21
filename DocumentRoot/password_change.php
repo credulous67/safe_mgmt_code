@@ -37,6 +37,7 @@ if (password_verify($_POST['old_pw'], $password)) {
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta http-equiv="refresh" content="5;url=http://127.0.0.1:8080/logout.php">
 		<title>Password_change</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
@@ -54,7 +55,9 @@ if (password_verify($_POST['old_pw'], $password)) {
 			<p>Password successfully changed<p>
 			<p>New password is <?=$_POST['new_pw']?></p>
 			<p>New hash is <?=$hash?></p>
+			<h2>You will shortly be logged out</h2>
 		</div>
 
 	</body>
 </html>
+

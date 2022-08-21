@@ -6,6 +6,8 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+include './config.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,10 +27,24 @@ if (!isset($_SESSION['loggedin'])) {
 		</nav>
 		<div class="content">
 			<h2>Password change</h2>
-			<p>Welcome back, <?=$_SESSION['name']?> your password has expired, please change</p>
-			<p>Password expiry: <?=$_SESSION['password_expiry']?></p>
-			<p>Now is: <?=$_SESSION['now']?></p>
-			<a href="password.php">Password</a>
+			<p>Welcome back, <?=$_SESSION['name']?> your password expired on, <?=$_SESSION['password_expiry']?>, please change</p>
+		</div>
+		<div class="login">
+                <form action="password_change.php" method="post">
+                                <label for="password">
+                                        <i class="fas fa-lock"></i>
+                                </label>
+                                <input type="password" name="old_pw" placeholder="Old password" id="old_pw" required>
+                                <label for="password">
+                                        <i class="fas fa-lock"></i>
+                                </label>
+                                <input type="password" name="new_pw" placeholder="New password" id="new_pw" required>
+                                <label for="password">
+                                        <i class="fas fa-lock"></i>
+                                </label>
+                                <input type="password" name="new_pw1" placeholder="New password .. again" id="new_pw1" required>
+                                <input type="submit" value="Change password">
+                </form>
 		</div>
 	</body>
 </html>

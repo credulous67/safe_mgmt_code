@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 // Change this to your connection info.
 include './config.php';
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
@@ -26,7 +26,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM user_accounts WHERE username
 			$_SESSION['loggedin'] = TRUE;
 			$_SESSION['name'] = $_POST['username'];
 			$_SESSION['id'] = $id;
-			echo 'Welcome ' . $_SESSION['name'] . $_SESSION['id'] . $_SESSION['loggedin']. '!';
+			header('Location: main_menu.php');
 		} else {
 			// Incorrect password
 			echo 'Incorrect username and/or password!';

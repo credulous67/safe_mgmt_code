@@ -58,8 +58,6 @@ if ($stmt = $con->prepare("SELECT password FROM user_accounts WHERE id  = ?" )) 
 		<div class="content">
 			<h2>Password change</h2>
 			<p>Password successfully changed</p>
-			<p>New password is <?=$_POST['new_pw']?></p>
-			<p>New hash is <?=$hash?></p>
 			<h2>You will shortly be logged out</h2>
 		</div>
 

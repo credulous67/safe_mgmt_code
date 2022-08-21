@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Aug 21, 2022 at 11:51 AM
+-- Generation Time: Aug 21, 2022 at 02:31 PM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.22
 
@@ -57,6 +57,7 @@ CREATE TABLE `audit_log` (
 
 CREATE TABLE `keys` (
   `item_number` bigint(20) UNSIGNED NOT NULL,
+  `imported_item_number` text DEFAULT NULL,
   `key_name` varchar(40) NOT NULL,
   `safe_name` int(11) NOT NULL COMMENT 'id from safes',
   `system_name` int(30) NOT NULL COMMENT 'id from systems',
@@ -243,7 +244,7 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `username`, `password`, `email`, `user_roles`, `account_disabled`, `password_expiry`) VALUES
-(1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com', '2', 0, '2022-11-19 00:00:00'),
+(1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com', '2', 0, '2022-08-21 00:00:00'),
 (2, 'key_admin', '$2y$10$eqEabP6tkkfuQEBjk.dYqOdZmQNw5/Df/w/.v.W.VxPxdZTgdaYbe', 'key_admin@test.com', '1', 0, '2022-11-19 00:00:00'),
 (3, 'safe_viewonly', '$2y$10$MLggX8S.EJHpKNAAuSrcNeSG3yGavs1w7A7eAWd8bRWvB9SUUfDK6', 'safe_viewonly@test.com', '2', 0, '2022-11-19 00:00:00'),
 (4, 'custodian', '$2y$10$k7KD9hA6uQhDIlUDwi3VUekrdWfkqhmViaPv2gysbdGzQeJAyAw8e', 'custodian@test.com', '3', 0, '2022-11-19 00:00:00'),

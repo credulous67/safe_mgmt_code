@@ -22,15 +22,20 @@ if ($stmt = $con->prepare("SELECT password FROM user_accounts WHERE id  = ?" )) 
         if ($stmt->num_rows > 0) {
                 $stmt->bind_result($password);
                 $stmt->fetch();
-
+	}
+	if (password_verify($_POST['old_pw'], $password)) {
+		$hash = password_hash($_POST['new_pw'], PASSWORD_DEFAULT);
+		$stmt = $con->prepare("UPDATE user_accounts SET password=? WHERE id=?");
+	        $stmt->bind_param ('si',$hash,$_SESSION['id']);
+	        $stmt->execute();
+		$stmt = $con->prepare("UPDATE user_accounts SET password_expiry=ADDDATE(curdate(), INTERVAL 90 DAY)");
+	        $stmt->execute();
+	} else {
+		exit ('Old password failed verification!');
 	}
 }
-if (password_verify($_POST['old_pw'], $password)) {
-	$hash = password_hash($_POST['new_pw'], PASSWORD_DEFAULT);
-	$stmt = $con->prepare("UPDATE user_accounts SET password=? WHERE id=?");
-        $stmt->bind_param ('si',$hash,$_SESSION['id']);
-        $stmt->execute();
-}
+
+
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +57,7 @@ if (password_verify($_POST['old_pw'], $password)) {
 		</nav>
 		<div class="content">
 			<h2>Password change</h2>
-			<p>Password successfully changed<p>
+			<p>Password successfully changed</p>
 			<p>New password is <?=$_POST['new_pw']?></p>
 			<p>New hash is <?=$hash?></p>
 			<h2>You will shortly be logged out</h2>

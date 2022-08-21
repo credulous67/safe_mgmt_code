@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Aug 20, 2022 at 02:53 PM
+-- Generation Time: Aug 21, 2022 at 09:36 AM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.22
 
@@ -47,7 +47,7 @@ CREATE TABLE `audit_log` (
   `media_type` int(11) NOT NULL COMMENT 'id from media',
   `key_type` int(11) NOT NULL COMMENT 'id from key_types',
   `hash` varchar(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -75,7 +75,7 @@ CREATE TABLE `keys` (
   `media_type_name` int(11) NOT NULL COMMENT 'id from media_types',
   `key_type_name` int(11) NOT NULL COMMENT 'id from key_types',
   `hash` varchar(6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE `keys` (
 CREATE TABLE `key_types` (
   `id` int(11) NOT NULL,
   `key_type_name` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `key_types`
@@ -131,7 +131,7 @@ INSERT INTO `key_types` (`id`, `key_type_name`) VALUES
 CREATE TABLE `media_types` (
   `id` int(11) NOT NULL,
   `media_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `media_types`
@@ -156,7 +156,7 @@ INSERT INTO `media_types` (`id`, `media_name`) VALUES
 CREATE TABLE `regions` (
   `id` int(11) NOT NULL,
   `region_name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `regions`
@@ -179,7 +179,7 @@ CREATE TABLE `safes` (
   `id` int(11) NOT NULL,
   `safe_name` varchar(20) NOT NULL,
   `safe_location` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `safes`
@@ -202,7 +202,7 @@ INSERT INTO `safes` (`id`, `safe_name`, `safe_location`) VALUES
 CREATE TABLE `systems` (
   `id` int(11) NOT NULL,
   `systems_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `systems`
@@ -236,7 +236,7 @@ CREATE TABLE `user_accounts` (
   `user_roles` varchar(255) NOT NULL,
   `account_disabled` tinyint(1) NOT NULL,
   `password_expiry` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_accounts`
@@ -255,7 +255,7 @@ CREATE TABLE `user_roles` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables

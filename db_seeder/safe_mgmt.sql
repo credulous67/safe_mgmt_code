@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Aug 21, 2022 at 09:36 AM
+-- Generation Time: Aug 21, 2022 at 11:51 AM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.22
 
@@ -233,9 +233,9 @@ CREATE TABLE `user_accounts` (
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `user_roles` varchar(255) NOT NULL,
-  `account_disabled` tinyint(1) NOT NULL,
-  `password_expiry` datetime NOT NULL
+  `user_roles` varchar(255) DEFAULT NULL,
+  `account_disabled` tinyint(1) NOT NULL DEFAULT 1,
+  `password_expiry` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -243,7 +243,20 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `username`, `password`, `email`, `user_roles`, `account_disabled`, `password_expiry`) VALUES
-(1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com', '', 0, '0000-00-00 00:00:00');
+(1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com', '2', 0, '2022-11-19 00:00:00'),
+(2, 'key_admin', '$2y$10$eqEabP6tkkfuQEBjk.dYqOdZmQNw5/Df/w/.v.W.VxPxdZTgdaYbe', 'key_admin@test.com', '1', 0, '2022-11-19 00:00:00'),
+(3, 'safe_viewonly', '$2y$10$MLggX8S.EJHpKNAAuSrcNeSG3yGavs1w7A7eAWd8bRWvB9SUUfDK6', 'safe_viewonly@test.com', '2', 0, '2022-11-19 00:00:00'),
+(4, 'custodian', '$2y$10$k7KD9hA6uQhDIlUDwi3VUekrdWfkqhmViaPv2gysbdGzQeJAyAw8e', 'custodian@test.com', '3', 0, '2022-11-19 00:00:00'),
+(5, 'inventory', '$2y$10$z/6k92nyQVQie2UCcBv02.vA0b9Ega.iD/TUuoo8kKyb.Vv1ufvle', 'inventory@test.com', '4', 0, '2022-11-19 00:00:00'),
+(6, 'audit_log', '$2y$10$O5zElYOgEWxf7RsTehorK.5s2SLlxzlt0dkRgC5NSQBcVnRh/JSWa', 'audit_log@test.com', '5', 0, '2022-11-19 00:00:00');
+
+--
+-- Triggers `user_accounts`
+--
+DELIMITER $$
+CREATE TRIGGER `setDefaultDate` BEFORE INSERT ON `user_accounts` FOR EACH ROW SET NEW.password_expiry = ADDDATE(curdate(), INTERVAL 90 DAY)
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -256,6 +269,17 @@ CREATE TABLE `user_roles` (
   `name` varchar(50) NOT NULL,
   `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_roles`
+--
+
+INSERT INTO `user_roles` (`id`, `name`, `description`) VALUES
+(1, 'key_admin', 'Can manage/create user account, assign roles, manage safes (but not items), manage key types, manage media types, manage systems'),
+(2, 'safe_viewonly', 'Can view all safe records'),
+(3, 'custodian', 'Can pull, return and add keys safe items'),
+(4, 'inventory', 'Can perform safe inventories'),
+(5, 'audit_log', 'Can view the audit log');
 
 --
 -- Indexes for dumped tables
@@ -377,13 +401,13 @@ ALTER TABLE `systems`
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_roles`
 --
 ALTER TABLE `user_roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

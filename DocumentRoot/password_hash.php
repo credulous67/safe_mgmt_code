@@ -6,12 +6,16 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+if ( !isset($_POST['password1']) || $_POST['password1'] != $_POST['password2']) {
+	exit('Passwords do not match');
+}
+$hash = password_hash($_POST['password1'], PASSWORD_DEFAULT)
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Main menu</title>
+		<title>Password hash</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
@@ -24,9 +28,10 @@ if (!isset($_SESSION['loggedin'])) {
 			</div>
 		</nav>
 		<div class="content">
-			<h2>Main menu</h2>
-			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<a href="password.php">Password</a>
+			<h2>Password hash</h2>
+			<p>Password hash for </p>
+			<p><?=$_POST['password1']?></p>
+			<p><?=$hash?></p>
 		</div>
 	</body>
 </html>

@@ -11,7 +11,7 @@ if (!isset($_SESSION['loggedin'])) {
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Main menu</title>
+		<title>Password</title>
 		<link href="style.css" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
@@ -24,9 +24,21 @@ if (!isset($_SESSION['loggedin'])) {
 			</div>
 		</nav>
 		<div class="content">
-			<h2>Main menu</h2>
+			<h2>Password</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
-			<a href="password.php">Password</a>
 		</div>
+		<div class="login">
+                <form action="password_hash.php" method="post">
+                                <label for="password">
+                                        <i class="fas fa-lock"></i>
+                                </label>
+                                <input type="password" name="password1" placeholder="Password" id="password1" required>
+                                <label for="password">
+                                        <i class="fas fa-lock"></i>
+                                </label>
+                                <input type="password" name="password2" placeholder="Type password again" id="password2" required>
+                                <input type="submit" value="Generate hash">
+                </form>
+		<?div>
 	</body>
 </html>

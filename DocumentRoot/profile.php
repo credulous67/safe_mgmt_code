@@ -28,7 +28,7 @@ $stmt->close();
 		<nav class="navtop">
 			<div>
 				<h1>Encryption Services safe management</h1>
-				<a href="main_menu.php"><i class="fas fa-bars"></i>Main menu</a>
+				<a href="main_menu.php"><i class="fas fa-map-signs"></i>Main menu</a>
 				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
 			</div>
 		</nav>

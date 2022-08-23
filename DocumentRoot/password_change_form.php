@@ -30,7 +30,7 @@ include './config.php';
 			<p>Welcome back, <?=$_SESSION['name']?> your password expired on, <?=$_SESSION['password_expiry']?>, please change</p>
 		</div>
 		<div class="login">
-                <form action="password_change.php" method="post">
+                <form action="password_change_script.php" method="post">
                                 <label for="password">
                                         <i class="fas fa-lock"></i>
                                 </label>

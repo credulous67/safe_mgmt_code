@@ -28,6 +28,16 @@ if ($stmt = $con->prepare("SELECT password FROM user_accounts WHERE id  = ?" )) 
 		$stmt = $con->prepare("UPDATE user_accounts SET password=? WHERE id=?");
 	        $stmt->bind_param ('si',$hash,$_SESSION['id']);
 	        $stmt->execute();
+// pwscore code
+		$PWSCORE  = "/path/to/pwscore";
+		$command = "echo " . escapeshellarg($_POST['new_pw']) . " | {$PWSCORE}";
+		exec($command, $out, $ret);
+		if(($ret == 0) && is_numeric($out[1])) {
+			return (int) $out[1]; // return score
+		} else {
+			return FALSE; // probably OK, but may be too short, or a palindrome
+		}
+// end of pwscore code
 		$stmt = $con->prepare("UPDATE user_accounts SET password_expiry=ADDDATE(curdate(), INTERVAL 90 DAY)");
 	        $stmt->execute();
 	} else {

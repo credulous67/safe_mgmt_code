@@ -17,18 +17,18 @@ if (!isset($_SESSION['loggedin'])) {
 <!--		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> -->
 	</head>
 	<body class="loggedin">
-		<div class="navtop">
+		<nav class="navtop">
 			<div>
 				<h1>Encryption Services safe management</h1>
 				<a href="profile.php"><i class="material-icons">account_circle</i>Profile</a>
 				<a href="logout.php"><i class="material-icons">exit_to_app</i>Logout</a>
 			</div>
-		</div>
-		<div class="sidebar">
+		</nav>
+		<nav class="sidebar">
 		<div> <h1>test</h1> </div>
 		<div> <a href="password_generation_script.php">Password generation</a> </div>
-		</div>
-		<div class="body-text">
+		</nav>
+		<div class="content">
 			<h2>Main menu</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
 			<a href="password_generation_script.php">Password generation</a>

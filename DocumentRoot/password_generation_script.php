@@ -7,11 +7,8 @@ if (!isset($_SESSION['loggedin'])) {
 	exit;
 }
 
-$command = "/usr/bin/pwqgen";
-exec($command, $out, $ret);
-if ( $ret == 0 ) { 
-	$passphrase = $out[0]; 
-}
+include 'functions.php';
+$password = generate_password();
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +30,7 @@ if ( $ret == 0 ) {
 			<h2>Password generation</h2>
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
 			<p>Passphrase is: 
-			<mark><em><b><?=$passphrase?></b></em></mark></p>
+			<mark><em><b><?=$password?></b></em></mark></p>
 		</div>
 	</body>
 </html>

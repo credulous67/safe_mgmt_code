@@ -7,6 +7,8 @@ if (!isset($_SESSION['loggedin'])) {
 	exit;
 }
 include './config.php';
+include './functions.php';
+$new_pw = generate_password();
 
 ?>
 <!DOCTYPE html>
@@ -31,15 +33,15 @@ include './config.php';
 		</div>
 		<div class="login">
                 <form action="password_change_script.php" method="post">
-                                <label for="password">
+                                <label for="old_pw">
                                         <i class="fas fa-lock"></i>
                                 </label>
                                 <input type="password" name="old_pw" placeholder="Old password" id="old_pw" required>
-                                <label for="password">
-                                        <i class="fas fa-lock"></i>
+                                <label for="new_pw">
+                                        <i class="fas fa-unlock"></i>
                                 </label>
-                                <input type="password" name="new_pw" placeholder="New password" id="new_pw" required>
-                                <label for="password">
+				<input type="text" name="new_pw"  id="new_pw" value=<?=$new_pw?> required>
+                                <label for="new_pw1">
                                         <i class="fas fa-lock"></i>
                                 </label>
                                 <input type="password" name="new_pw1" placeholder="New password .. again" id="new_pw1" required>

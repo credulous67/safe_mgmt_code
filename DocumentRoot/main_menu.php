@@ -25,7 +25,7 @@ if (!isset($_SESSION['loggedin'])) {
 			</div>
 		</nav>
 <!--		<nav class="sidebar"> -->
-		<nav style="height:100%;width:150px;position:absolute;left:0;top:0;padding-top:40px;background-color:lightblue">
+		<nav style="height:100%;width:150px;position:absolute;padding-top:40px;background-color:lightblue">
 		<div> <h1>test</h1> </div>
 		<div> <a href="password_generation_script.php">Password generation</a> </div>
 		</nav>

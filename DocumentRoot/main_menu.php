@@ -28,6 +28,7 @@ if (!isset($_SESSION['loggedin'])) {
 			<div>
 				<h1>Main menu</h1>
 				<a href="password_generation_script.php"><i class="material-icons">bolt</i>Password generation</a>
+				<a href="insert_key_form.php"><i class="material-icons">note_add</i>Insert new key</a>
 			</div>
 		</nav>
 		<div class="content">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Aug 21, 2022 at 02:31 PM
+-- Generation Time: Aug 28, 2022 at 12:43 PM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.22
 
@@ -56,26 +56,27 @@ CREATE TABLE `audit_log` (
 --
 
 CREATE TABLE `keys` (
-  `item_number` bigint(20) UNSIGNED NOT NULL,
-  `imported_item_number` text DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `imported_id` text DEFAULT NULL,
   `key_name` varchar(40) NOT NULL,
-  `safe_name` int(11) NOT NULL COMMENT 'id from safes',
-  `system_name` int(30) NOT NULL COMMENT 'id from systems',
-  `region_name` int(10) NOT NULL COMMENT 'id from regions',
-  `date_added` date NOT NULL,
-  `date_removed` date NOT NULL,
-  `date_inventoried` date NOT NULL,
-  `comments` varchar(255) NOT NULL,
-  `client _name` varchar(30) DEFAULT NULL COMMENT 'Not used',
+  `safe_id` int(11) NOT NULL COMMENT 'id from safes',
+  `system_id` int(30) NOT NULL COMMENT 'id from systems',
+  `region_id` int(10) NOT NULL COMMENT 'id from regions',
+  `date_added` date NOT NULL DEFAULT current_timestamp(),
+  `created_by` int(11) DEFAULT NULL,
+  `date_removed` date DEFAULT NULL,
+  `date_inventoried` date DEFAULT NULL COMMENT 'Not included in hash calc',
+  `comments` varchar(255) DEFAULT NULL COMMENT 'Not included in hash calc',
+  `client_name` varchar(30) DEFAULT NULL COMMENT 'Not used',
   `client_number` smallint(6) DEFAULT NULL COMMENT 'Not used',
-  `device_serial` varchar(30) NOT NULL,
-  `TPE` varchar(12) NOT NULL,
-  `key_serial` varchar(30) NOT NULL,
-  `Comb_KCV` varchar(6) NOT NULL,
   `bin_number` int(11) DEFAULT NULL COMMENT 'Not used',
-  `media_type_name` int(11) NOT NULL COMMENT 'id from media_types',
-  `key_type_name` int(11) NOT NULL COMMENT 'id from key_types',
-  `hash` varchar(6) NOT NULL
+  `device_serial` varchar(30) DEFAULT NULL,
+  `TPE` varchar(30) NOT NULL COMMENT 'Not included in hash calc',
+  `key_serial` varchar(30) NOT NULL,
+  `comb_KCV` varchar(6) DEFAULT NULL,
+  `media_type_id` int(11) NOT NULL COMMENT 'id from media_types',
+  `key_type_id` int(11) NOT NULL COMMENT 'id from key_types',
+  `hash` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -86,14 +87,14 @@ CREATE TABLE `keys` (
 
 CREATE TABLE `key_types` (
   `id` int(11) NOT NULL,
-  `key_type_name` varchar(40) NOT NULL
+  `key_type` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `key_types`
 --
 
-INSERT INTO `key_types` (`id`, `key_type_name`) VALUES
+INSERT INTO `key_types` (`id`, `key_type`) VALUES
 (1, 'RLMK'),
 (2, 'LMK'),
 (3, 'ZMK (KEK)'),
@@ -131,22 +132,22 @@ INSERT INTO `key_types` (`id`, `key_type_name`) VALUES
 
 CREATE TABLE `media_types` (
   `id` int(11) NOT NULL,
-  `media_name` varchar(30) NOT NULL
+  `media_type` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `media_types`
 --
 
-INSERT INTO `media_types` (`id`, `media_name`) VALUES
-(2, 'Smartcard'),
-(3, 'Paper'),
-(4, 'Physical key'),
-(5, 'Floppy disk1'),
-(6, 'USB stick'),
-(7, 'Chequebook'),
-(8, 'CD/DVD'),
-(9, 'Card reader');
+INSERT INTO `media_types` (`id`, `media_type`) VALUES
+(1, 'Smartcard'),
+(2, 'Paper'),
+(3, 'Physical key'),
+(4, 'Floppy disk'),
+(5, 'USB stick'),
+(6, 'Chequebook'),
+(7, 'CD/DVD'),
+(8, 'Card reader');
 
 -- --------------------------------------------------------
 
@@ -202,14 +203,14 @@ INSERT INTO `safes` (`id`, `safe_name`, `safe_location`) VALUES
 
 CREATE TABLE `systems` (
   `id` int(11) NOT NULL,
-  `systems_name` varchar(30) NOT NULL
+  `system_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `systems`
 --
 
-INSERT INTO `systems` (`id`, `systems_name`) VALUES
+INSERT INTO `systems` (`id`, `system_name`) VALUES
 (1, 'Atalla'),
 (2, 'BACS'),
 (3, 'BCSS'),
@@ -244,7 +245,7 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `username`, `password`, `email`, `user_roles`, `account_disabled`, `password_expiry`) VALUES
-(1, 'test', '$2y$10$SfhYIDtn.iOuCW7zfoFLuuZHX6lja4lF4XA4JqNmpiH/.P3zB8JCa', 'test@test.com', '2', 0, '2022-08-21 00:00:00'),
+(1, 'test', '$2y$10$OUDloZfbCSRr9/bx9UXymeRwaXeoKf7sF5gr1DFcQ1oFuGC2V2oOy', 'test@test.com', '2', 0, '2022-10-19 00:00:00'),
 (2, 'key_admin', '$2y$10$eqEabP6tkkfuQEBjk.dYqOdZmQNw5/Df/w/.v.W.VxPxdZTgdaYbe', 'key_admin@test.com', '1', 0, '2022-11-19 00:00:00'),
 (3, 'safe_viewonly', '$2y$10$MLggX8S.EJHpKNAAuSrcNeSG3yGavs1w7A7eAWd8bRWvB9SUUfDK6', 'safe_viewonly@test.com', '2', 0, '2022-11-19 00:00:00'),
 (4, 'custodian', '$2y$10$k7KD9hA6uQhDIlUDwi3VUekrdWfkqhmViaPv2gysbdGzQeJAyAw8e', 'custodian@test.com', '3', 0, '2022-11-19 00:00:00'),
@@ -302,13 +303,13 @@ ALTER TABLE `audit_log`
 -- Indexes for table `keys`
 --
 ALTER TABLE `keys`
-  ADD PRIMARY KEY (`item_number`),
-  ADD UNIQUE KEY `item_number` (`item_number`),
-  ADD KEY `media_types` (`media_type_name`),
-  ADD KEY `key_types` (`key_type_name`),
-  ADD KEY `safes` (`safe_name`),
-  ADD KEY `systems` (`system_name`),
-  ADD KEY `regions` (`region_name`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `item_number` (`id`),
+  ADD KEY `media_types` (`media_type_id`),
+  ADD KEY `key_types` (`key_type_id`),
+  ADD KEY `safes` (`safe_id`),
+  ADD KEY `systems` (`system_id`),
+  ADD KEY `regions` (`region_id`);
 
 --
 -- Indexes for table `key_types`
@@ -366,7 +367,7 @@ ALTER TABLE `audit_log`
 -- AUTO_INCREMENT for table `keys`
 --
 ALTER TABLE `keys`
-  MODIFY `item_number` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `key_types`
@@ -378,7 +379,7 @@ ALTER TABLE `key_types`
 -- AUTO_INCREMENT for table `media_types`
 --
 ALTER TABLE `media_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `regions`
@@ -418,11 +419,11 @@ ALTER TABLE `user_roles`
 -- Constraints for table `keys`
 --
 ALTER TABLE `keys`
-  ADD CONSTRAINT `key_types` FOREIGN KEY (`key_type_name`) REFERENCES `key_types` (`id`),
-  ADD CONSTRAINT `media_types` FOREIGN KEY (`media_type_name`) REFERENCES `media_types` (`id`),
-  ADD CONSTRAINT `regions` FOREIGN KEY (`region_name`) REFERENCES `regions` (`id`),
-  ADD CONSTRAINT `safes` FOREIGN KEY (`safe_name`) REFERENCES `safes` (`id`),
-  ADD CONSTRAINT `systems` FOREIGN KEY (`system_name`) REFERENCES `systems` (`id`);
+  ADD CONSTRAINT `key_types` FOREIGN KEY (`key_type_id`) REFERENCES `key_types` (`id`),
+  ADD CONSTRAINT `media_types` FOREIGN KEY (`media_type_id`) REFERENCES `media_types` (`id`),
+  ADD CONSTRAINT `regions` FOREIGN KEY (`region_id`) REFERENCES `regions` (`id`),
+  ADD CONSTRAINT `safes` FOREIGN KEY (`safe_id`) REFERENCES `safes` (`id`),
+  ADD CONSTRAINT `systems` FOREIGN KEY (`system_id`) REFERENCES `systems` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -10,9 +10,8 @@ function generate_password() {
 	}
 }
 
-function update_key_hash($id)
+function update_key_hash($con,$id)
 {
-	include './config.php';
         // These selected items are used to created key item hash which is then updated
         // I have deliberately not used 
         // date_inventoried
@@ -29,4 +28,11 @@ function update_key_hash($id)
 	$stmt = $con->prepare("UPDATE `keys` SET hash = '$r' WHERE id='$id'");
 	$stmt->execute();
 	return [$r, $key_string];
+}
+
+function clean_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
 }

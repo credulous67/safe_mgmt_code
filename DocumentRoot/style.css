@@ -184,6 +184,7 @@ input[type=text], select, textarea{
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
+  text-indent: 5px;
 }
 
 /* Style the submit button */

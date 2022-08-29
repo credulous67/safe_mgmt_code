@@ -40,13 +40,8 @@ if ($stmt = $con->prepare("INSERT INTO `keys` (key_name, safe_id, system_id, reg
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body class="loggedin">
-		<nav class="navtop">
-			<div>
-				<h1>Encryption Services safe management</h1>
-                                <a href="main_menu.php"><i class="material-icons">signpost</i>Main menu</a>
-                                <a href="logout.php"><i class="material-icons">exit_to_app</i>Logout</a>
-			</div>
-		</nav>
+        <?php require_once(__DIR__.'/navtop.php'); ?>
+        <?php require_once(__DIR__.'/sidebar.php'); ?>
 		<div class="content">
 			<h2>Insert new key</h2>
 			<p>New key successfully added to the database</p>

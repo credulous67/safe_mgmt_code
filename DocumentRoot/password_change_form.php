@@ -20,13 +20,8 @@ $new_pw = generate_password();
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">
-		<nav class="navtop">
-			<div>
-				<h1>Encryption Services safe management</h1>
-				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			</div>
-		</nav>
+        <?php require_once(__DIR__.'/navtop.php'); ?>
+        <?php require_once(__DIR__.'/sidebar.php'); ?>
 		<div class="content">
 			<h2>Password change</h2>
 			<p>Welcome back, <?=$_SESSION['name']?> your password expired on, <?=$_SESSION['password_expiry']?>, please change</p>

@@ -19,23 +19,12 @@ include './functions.php';
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body class="loggedin">
-		<nav class="navtop">
-			<div>
-				<h1>Encryption Services safe management</h1>
-				<a href="profile.php"><i class="material-icons">account_circle</i>Profile</a>
-				<a href="logout.php"><i class="material-icons">exit_to_app</i>Logout</a>
-			</div>
-		</nav>
-                <nav class="sidebar">
-                        <div>
-                                <a href="main_menu.php"><h1>Main menu</h1></a>
-                                <a href="password_generation_script.php"><i class="material-icons">bolt</i>Password generation</a>
-                                <a href="insert_key_form.php"><i class="material-icons">note_add</i>Insert new key</a>
-                        </div>
-                </nav>
+		<?php require_once(__DIR__.'/navtop.php'); ?>
+		<?php require_once(__DIR__.'/sidebar.php'); ?>
 		<div class="content">
 			<h2>Insert new key</h2>
 <!--			<p>Welcome back, <?=$_SESSION['name']?> your password expired on, <?=$_SESSION['password_expiry']?>, please change</p> -->
+			<div class="container">
 	                <form class="form-inline" action="insert_key_script.php" method="post">
 				<div class="row">
 					<div class="col-25">
@@ -142,6 +131,7 @@ include './functions.php';
 					</div>
 				</div>
 	                </form>
+			</div>
 		</div>
 	</body>
 </html>

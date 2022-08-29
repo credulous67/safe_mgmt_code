@@ -151,7 +151,7 @@ body.loggedin {
         font-size: 24px;
         padding: 0;
         margin: 0;
-        color: #eaebed;
+        color: #80bfff;
         font-weight: normal;
 }
 .sidebar div a {
@@ -167,7 +167,7 @@ body.loggedin {
         color: #eaebed;
 }
 .sidebar div h1:hover {
-        color: #c1c4c8;
+        color: #cce6ff;
 }
 
  /* Style inputs, select elements and textareas */

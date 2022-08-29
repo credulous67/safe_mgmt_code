@@ -58,13 +58,8 @@ if ($stmt = $con->prepare("SELECT password FROM user_accounts WHERE id  = ?" )) 
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 	</head>
 	<body class="loggedin">
-		<nav class="navtop">
-			<div>
-				<h1>Encryption Services safe management</h1>
-				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
-			</div>
-		</nav>
+        <?php require_once(__DIR__.'/navtop.php'); ?>
+        <?php require_once(__DIR__.'/sidebar.php'); ?>
 		<div class="content">
 			<h2>Password change</h2>
 			<p>Password successfully changed</p>

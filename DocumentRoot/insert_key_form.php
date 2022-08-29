@@ -29,12 +29,12 @@ include './functions.php';
 		<div class="content">
 			<h2>Insert new key</h2>
 <!--			<p>Welcome back, <?=$_SESSION['name']?> your password expired on, <?=$_SESSION['password_expiry']?>, please change</p> -->
-	                <form action="insert_key_script.php" method="post">
+	                <form class="form-inline" action="insert_key_script.php" method="post">
 	                                <label for="key_name">Key name:</label>
 	                                <input type="text" name="key_name" placeholder="Enter key name" id="key_name" required>
 	                                <label for="TPE">Tamperproof #:</label>
 					<input type="text" name="TPE"  id="new_pw" placeholder="Tamproof envelope number" id="TPE" required>
-	                                <br><label for="key_serial">Key serial number:</label>
+	                                <label for="key_serial">Key serial number:</label>
 	                                <input type="text" name="key_serial" placeholder="Key serial or unique number" id="key_serial" required>
                                         <label for="safe_name">Safe name:</label>
 					<select name="safe_id">
@@ -82,7 +82,7 @@ include './functions.php';
 					?>
 					</select>
 
-	                                <br><input type="submit" value="Add key">
+	                                <input type="submit" value="Add key">
 	                </form>
 		</div>
 	</body>

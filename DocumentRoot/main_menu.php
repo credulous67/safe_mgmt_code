@@ -26,7 +26,7 @@ if (!isset($_SESSION['loggedin'])) {
 		</nav>
 		<nav class="sidebar">
 			<div>
-				<h1>Main menu</h1>
+				<a href="main_menu.php"><h1>Main menu</h1></a>
 				<a href="password_generation_script.php"><i class="material-icons">bolt</i>Password generation</a>
 				<a href="insert_key_form.php"><i class="material-icons">note_add</i>Insert new key</a>
 			</div>

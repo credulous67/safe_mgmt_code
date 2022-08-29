@@ -22,10 +22,17 @@ include './functions.php';
 		<nav class="navtop">
 			<div>
 				<h1>Encryption Services safe management</h1>
-				<a href="main_menu.php"><i class="material-icons">signpost</i>Main menu</a>
+				<a href="profile.php"><i class="material-icons">account_circle</i>Profile</a>
 				<a href="logout.php"><i class="material-icons">exit_to_app</i>Logout</a>
 			</div>
 		</nav>
+                <nav class="sidebar">
+                        <div>
+                                <a href="main_menu.php"><h1>Main menu</h1></a>
+                                <a href="password_generation_script.php"><i class="material-icons">bolt</i>Password generation</a>
+                                <a href="insert_key_form.php"><i class="material-icons">note_add</i>Insert new key</a>
+                        </div>
+                </nav>
 		<div class="content">
 			<h2>Insert new key</h2>
 <!--			<p>Welcome back, <?=$_SESSION['name']?> your password expired on, <?=$_SESSION['password_expiry']?>, please change</p> -->

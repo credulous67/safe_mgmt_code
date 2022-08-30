@@ -24,10 +24,11 @@ function update_key_hash($con,$id)
         $stmt->bind_result($key_id, $imported_id, $key_name, $safe_id, $system_id, $region_id, $date_added, $created_by, $date_removed, $client_name, $client_number, $bin_number, $device_serial, $key_serial, $comb_KCV, $media_type_id, $key_type_id);
         $stmt->fetch();
 	$key_string=$key_id.$imported_id.$key_name.$safe_id.$system_id.$region_id.$date_added.$created_by.$date_removed.$client_name.$client_number.$bin_number.$device_serial.$key_serial.$comb_KCV.$media_type_id.$key_type_id;
-	$r = hash("sha256",$key_string,false);
-	$stmt = $con->prepare("UPDATE `keys` SET hash = '$r' WHERE id='$id'");
+	$sha256_hash = strtoupper(substr(hash("sha256",$key_string,false),0,6));
+	$sha1_hash = strtoupper(substr(hash("sha1",$key_string,false),0,6));
+	$stmt = $con->prepare("UPDATE `keys` SET sha256_hash = '$sha256_hash', sha1_hash = '$sha1_hash' WHERE id='$id'");
 	$stmt->execute();
-	return [$r, $key_string];
+	return [$sha256_hash, $sha1_hash, $key_string];
 }
 
 function clean_input($data) {

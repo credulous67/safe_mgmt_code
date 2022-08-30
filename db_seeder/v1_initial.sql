@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Aug 28, 2022 at 12:43 PM
+-- Generation Time: Aug 30, 2022 at 02:29 PM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.22
 
@@ -76,7 +76,8 @@ CREATE TABLE `keys` (
   `comb_KCV` varchar(6) DEFAULT NULL,
   `media_type_id` int(11) NOT NULL COMMENT 'id from media_types',
   `key_type_id` int(11) NOT NULL COMMENT 'id from key_types',
-  `hash` varchar(128) NOT NULL
+  `sha256_hash` varchar(6) NOT NULL DEFAULT '0',
+  `sha1_hash` varchar(6) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

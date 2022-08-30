@@ -22,13 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$stmt->bind_param ('siiiissii',$key_name,$safe_id,$system_id,$region_id,$user_id,$TPE,$key_serial,$media_type_id,$key_type_id);
 		$stmt->execute();
 		$new_key_id= mysqli_insert_id($con);
-		[$hash,$keystring]=update_key_hash($con, $new_key_id);
+		[$sha256_hash,$sha1_hash,$keystring]=update_key_hash($con, $new_key_id);
 ?>
 <!DOCTYPE html>
 <html>
         <head>
                 <meta charset="utf-8">
-		<meta http-equiv="refresh" content="3;url=http://127.0.0.1:8080/insert_key_form.php">
+		<meta http-equiv="refresh" content="6;url=http://127.0.0.1:8080/insert_key_form.php">
                 <title>Insert new key</title>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
                 <link href="style.css" rel="stylesheet" type="text/css">
@@ -43,9 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <h2>Insert new key</h2>
                         <p>New key successfully added to the database</p>
                         <p>ID:<?=$new_key_id?></p>
-                        <p>HASH:<?=$hash?></p>
+                        <p>SHA256 HASH:<?=$sha256_hash?></p>
+                        <p>SHA1 HASH:<?=$sha1_hash?></p>
                         <p>KEYSTRING:<?=$keystring?></p>
 <?php
+//	echo "<script> alert('New item added to database')</script>";
+//	header('Location: insert_key_form.php');
+	exit;
 	} else {
 		// failed to insert
 		echo "failed to insert";

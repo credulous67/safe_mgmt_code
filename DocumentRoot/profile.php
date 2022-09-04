@@ -6,6 +6,12 @@ if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we expired?
+    //redirect to logout.php
+    header('Location: logout.php'); //change yoursite.com to the name of you site!!
+} else{ //if we haven'jt expired:
+    $_SESSION['last_activity'] = time(); //this was the moment of last activity.
+}
 include './config.php';
 // We don't have the password or email info stored in sessions so instead we can get the results from the database.
 $stmt = $con->prepare('SELECT password, email FROM user_accounts WHERE id = ?');

@@ -36,7 +36,9 @@ if ($stmt = $con->prepare("SELECT id, password, password_expiry FROM user_accoun
                         $_SESSION['loggedin'] = TRUE;
                         $_SESSION['name'] = $_POST['username'];
                         $_SESSION['id'] = $id;
-			$_SESSION['password_expiry'] = $password_expiry;
+						$_SESSION['password_expiry'] = $password_expiry;
+						$_SESSION['last_activity'] = time)();
+						$_SESSION['expire_time'] = 15*60;
                         header('Location: main_menu.php');
                 } else {
 			// Incorrect password

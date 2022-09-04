@@ -1,12 +1,19 @@
 <?php
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
-include './config.php';
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
 	header('Location: index.html');
 	exit;
 }
+if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we expired?
+    //redirect to logout.php
+    header('Location: logout.php'); //change yoursite.com to the name of you site!!
+} else{ //if we haven'jt expired:
+    $_SESSION['last_activity'] = time(); //this was the moment of last activity.
+}
+
+include './config.php';
 if (!isset($_POST['old_pw'], $_POST['new_pw'], $_POST['new_pw1'])) {
 	exit('Please fill in your old and new password fields!');
 }

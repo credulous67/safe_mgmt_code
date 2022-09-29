@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mariadb
--- Generation Time: Aug 30, 2022 at 02:29 PM
+-- Generation Time: Sep 29, 2022 at 11:10 AM
 -- Server version: 10.8.3-MariaDB-1:10.8.3+maria~jammy
 -- PHP Version: 8.0.22
 
@@ -238,20 +238,21 @@ CREATE TABLE `user_accounts` (
   `email` varchar(100) NOT NULL,
   `user_roles` varchar(255) DEFAULT NULL,
   `account_disabled` tinyint(1) NOT NULL DEFAULT 1,
-  `password_expiry` datetime DEFAULT NULL
+  `password_expiry` datetime DEFAULT NULL,
+  `test_account` tinyint(1) NOT NULL DEFAULT 1 COMMENT 'Flag to indicate test account'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_accounts`
 --
 
-INSERT INTO `user_accounts` (`id`, `username`, `password`, `email`, `user_roles`, `account_disabled`, `password_expiry`) VALUES
-(1, 'test', '$2y$10$OUDloZfbCSRr9/bx9UXymeRwaXeoKf7sF5gr1DFcQ1oFuGC2V2oOy', 'test@test.com', '2', 0, '2022-10-19 00:00:00'),
-(2, 'key_admin', '$2y$10$eqEabP6tkkfuQEBjk.dYqOdZmQNw5/Df/w/.v.W.VxPxdZTgdaYbe', 'key_admin@test.com', '1', 0, '2022-11-19 00:00:00'),
-(3, 'safe_viewonly', '$2y$10$MLggX8S.EJHpKNAAuSrcNeSG3yGavs1w7A7eAWd8bRWvB9SUUfDK6', 'safe_viewonly@test.com', '2', 0, '2022-11-19 00:00:00'),
-(4, 'custodian', '$2y$10$k7KD9hA6uQhDIlUDwi3VUekrdWfkqhmViaPv2gysbdGzQeJAyAw8e', 'custodian@test.com', '3', 0, '2022-11-19 00:00:00'),
-(5, 'inventory', '$2y$10$z/6k92nyQVQie2UCcBv02.vA0b9Ega.iD/TUuoo8kKyb.Vv1ufvle', 'inventory@test.com', '4', 0, '2022-11-19 00:00:00'),
-(6, 'audit_log', '$2y$10$O5zElYOgEWxf7RsTehorK.5s2SLlxzlt0dkRgC5NSQBcVnRh/JSWa', 'audit_log@test.com', '5', 0, '2022-11-19 00:00:00');
+INSERT INTO `user_accounts` (`id`, `username`, `password`, `email`, `user_roles`, `account_disabled`, `password_expiry`, `test_account`) VALUES
+(1, 'test', '$2y$10$OUDloZfbCSRr9/bx9UXymeRwaXeoKf7sF5gr1DFcQ1oFuGC2V2oOy', 'test@test.com', '2', 0, '2022-10-19 00:00:00', 1),
+(2, 'key_admin', '$2y$10$eqEabP6tkkfuQEBjk.dYqOdZmQNw5/Df/w/.v.W.VxPxdZTgdaYbe', 'key_admin@test.com', '1', 0, '2022-11-19 00:00:00', 1),
+(3, 'safe_viewonly', '$2y$10$MLggX8S.EJHpKNAAuSrcNeSG3yGavs1w7A7eAWd8bRWvB9SUUfDK6', 'safe_viewonly@test.com', '2', 0, '2022-11-19 00:00:00', 1),
+(4, 'custodian', '$2y$10$k7KD9hA6uQhDIlUDwi3VUekrdWfkqhmViaPv2gysbdGzQeJAyAw8e', 'custodian@test.com', '3', 0, '2022-11-19 00:00:00', 1),
+(5, 'inventory', '$2y$10$z/6k92nyQVQie2UCcBv02.vA0b9Ega.iD/TUuoo8kKyb.Vv1ufvle', 'inventory@test.com', '4', 0, '2022-11-19 00:00:00', 1),
+(6, 'audit_log', '$2y$10$O5zElYOgEWxf7RsTehorK.5s2SLlxzlt0dkRgC5NSQBcVnRh/JSWa', 'audit_log@test.com', '5', 0, '2022-11-19 00:00:00', 1);
 
 --
 -- Triggers `user_accounts`

@@ -18,7 +18,6 @@ if ($stmt = $con->prepare("SELECT id, password, password_expiry FROM user_accoun
 		$stmt->bind_result($id, $password, $password_expiry);
 		$stmt->fetch();
 		// Account exists, now we verify the password.
-		// Note: remember to use password_hash in your registration file to store the hashed passwords.
 		$now=date("Y-m-d H:i:s");
 		if (password_verify($_POST['password'], $password) && $password_expiry <= $now ) {
 			// Verification success! But password has expired
@@ -30,17 +29,17 @@ if ($stmt = $con->prepare("SELECT id, password, password_expiry FROM user_accoun
 			$_SESSION['password_expiry'] = $password_expiry;
 			header('Location: password_change_form.php');
 		} elseif (password_verify($_POST['password'], $password) && $password_expiry > $now ) {
-                        // Verification success! User has logged-in!
-                        // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
-                        session_regenerate_id();
-                        $_SESSION['loggedin'] = TRUE;
-                        $_SESSION['name'] = $_POST['username'];
-                        $_SESSION['id'] = $id;
-						$_SESSION['password_expiry'] = $password_expiry;
-						$_SESSION['last_activity'] = time)();
-						$_SESSION['expire_time'] = 15*60;
-                        header('Location: main_menu.php');
-                } else {
+			// Verification success! User has logged-in!
+			// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
+			session_regenerate_id();
+			$_SESSION['loggedin'] = TRUE;
+			$_SESSION['name'] = $_POST['username'];
+			$_SESSION['id'] = $id;
+			$_SESSION['password_expiry'] = $password_expiry;
+			$_SESSION['last_activity'] = time();
+			$_SESSION['expire_time'] = 15*60;
+			header('Location: main_menu.php');
+		} else {
 			// Incorrect password
 			echo 'Incorrect username and/or password!';
 		}

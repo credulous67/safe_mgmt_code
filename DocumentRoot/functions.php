@@ -31,9 +31,9 @@ function update_key_hash($con,$id)
 	return [$sha256_hash, $sha1_hash, $key_string];
 }
 
-function clean_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
+function clean_input($indata) {
+  $outdata = trim($indata);
+  $outdata = stripslashes($outdata);
+  $outdata = htmlspecialchars($outdata);
+  return $outdata;
 }

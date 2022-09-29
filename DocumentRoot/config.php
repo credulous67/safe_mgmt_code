@@ -3,6 +3,7 @@ $DATABASE_HOST = 'mariadb';
 $DATABASE_USER = '_svc_sm';
 $DATABASE_PASS = 'smpass';
 $DATABASE_NAME = 'safe_mgmt';
+$TIMEOUT_SESSION = 15; // This is the time in minutes for logged in session to time out if idle
 // Try and connect using the info above.
 $con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
 if ( mysqli_connect_errno() ) {

@@ -23,10 +23,12 @@ if ($stmt = $con->prepare("SELECT id, password, password_expiry FROM user_accoun
 			// Verification success! But password has expired
 			// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
 			session_regenerate_id();
-			$_SESSION['loggedin'] = TRUE;
+			$_SESSION['loggedin'] = FALSE;
 			$_SESSION['name'] = $_POST['username'];
 			$_SESSION['id'] = $id;
 			$_SESSION['password_expiry'] = $password_expiry;
+			$_SESSION['last_activity'] = time();
+			$_SESSION['expire_time'] = $TIMEOUT_SESSION * 60;
 			header('Location: password_change_form.php');
 		} elseif (password_verify($_POST['password'], $password) && $password_expiry > $now ) {
 			// Verification success! User has logged-in!

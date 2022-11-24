@@ -46,7 +46,7 @@ $new_pw = generate_password();
                                         <i class="fas fa-lock"></i>
                                 </label>
                                 <input type="password" name="new_pw1" placeholder="New password .. again" id="new_pw1" required>
-                                <input type="submit" value="Change password">
+                                <input type="submit">
                 </form>
 		</div>
 	</body>

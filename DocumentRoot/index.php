@@ -1,5 +1,8 @@
+<?php
+session_start();
+session_destroy();
+?>
 <!DOCTYPE html>
-include('logout.php')
 <html>
 	<head>
 		<meta charset="utf-8">

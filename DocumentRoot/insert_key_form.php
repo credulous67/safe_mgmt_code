@@ -2,8 +2,8 @@
 // We need to use sessions, so you should always start sessions using the below code.
 session_start();
 // If the user is not logged in redirect to the login page...
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+if ($_SESSION['loggedin'] == FALSE) {
+	header('Location: index.php');
 	exit;
 }
 if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we expired?

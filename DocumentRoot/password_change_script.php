@@ -3,7 +3,7 @@
 session_start();
 // If the user is not logged in redirect to the login page...
 if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.html');
+	header('Location: index.php');
 	exit;
 }
 if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we expired?
@@ -13,6 +13,7 @@ if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we e
     $_SESSION['last_activity'] = time(); //this was the moment of last activity.
 }
 
+exit ('EXIT password_change_script.php');
 include './config.php';
 if (!isset($_POST['old_pw'], $_POST['new_pw'], $_POST['new_pw1'])) {
 	exit('Please fill in your old and new password fields!');
@@ -61,8 +62,9 @@ if ($stmt = $con->prepare("SELECT password FROM user_accounts WHERE id  = ?" )) 
 		<meta charset="utf-8">
 		<meta http-equiv="refresh" content="5;url=http://127.0.0.1:8080/logout.php">
 		<title>Password_change</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link href="style.css" rel="stylesheet" type="text/css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+<!--		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> -->
 	</head>
 	<body class="loggedin">
         <?php require_once(__DIR__.'/navtop.php'); ?>

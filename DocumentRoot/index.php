@@ -1,6 +1,9 @@
 <?php
 session_start();
 session_destroy();
+function init(){
+	document.getElementById("username").focus();
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,14 +14,14 @@ session_destroy();
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
                 <link href="style.css" rel="stylesheet" type="text/css">
 	</head>
-	<body>
+	<body onload="document.login.username.focus()";>
 		<div class="login">
 			<h1>Safe Management Login</h1>
-			<form action="login_script.php" method="post">
+			<form action="login_script.php" method="post" name="login">
 				<label for="username">
 					<i class="material-icons">account_box</i>
 				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
+				<input type="text" name="username" placeholder="Username" id="username" autocomplete="off" required>
 				<label for="password">
 					<i class="material-icons">lock</i>
 				</label>

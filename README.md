@@ -45,7 +45,8 @@ Is based on my safe_mgmt_fedora image, it's purpose is to connect to the main da
 - [x] Also need to ensure that if user logs in but password is expired, that loggedin is set to FALSE so that if someone changes password_change.php to main_menu.php they are not logged in .. instead get dumped back to inde.html
 - [ ] Currently having an issue where password change does not seem to be calling password_change_script.php after submit.
 - [ ] Need to add new user creation with password generation and email  
-- [ ] Need password change screen to generate / suggest password using **pwqgen**  
+- [x] Need password change screen to generate / suggest password using **pwqgen**  
+- [ ] Need to sort out proper error handling instead of just exit with a message !!
 - [ ] Need to implement logout if idle for 10 mins (configure in profile?) 
 
 

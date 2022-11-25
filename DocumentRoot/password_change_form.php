@@ -25,27 +25,27 @@ $new_pw = generate_password();
 		<title>Password_change</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link href="style.css" rel="stylesheet" type="text/css">
-<!--		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> -->
 	</head>
-	<body class="loggedin">
-        <?php require_once(__DIR__.'/navtop.php'); ?>
-        <?php require_once(__DIR__.'/sidebar.php'); ?>
-		<div class="content">
-			<h2>Password change</h2>
-			<p>Welcome back, <?=$_SESSION['name']?> your password expired on, <?=$_SESSION['password_expiry']?>, please change</p>
-		</div>
+	<body onload="document.pwchange.old_pw.focus()";>
+<!--        <?php require_once(__DIR__.'/navtop.php'); ?>
+        <?php require_once(__DIR__.'/sidebar.php'); ?> -->
 		<div class="login">
-                <form action="password_change_script.php" method="post">
+<!--		<div class="content"> -->
+			<h1>Password change</h1>
+			<p>Welcome back, <?=$_SESSION['name']?></p>
+			<p>Your password expired on, <?=$_SESSION['password_expiry']?></p>
+<!--		</div> -->
+                <form action="password_change_script.php" method="post" name="pwchange">
                                 <label for="old_pw">
-                                        <i class="fas fa-lock"></i>
+                                        <i class="material-icons">lock</i>
                                 </label>
                                 <input type="password" name="old_pw" placeholder="Old password" id="old_pw" required>
                                 <label for="new_pw">
-                                        <i class="fas fa-unlock"></i>
+                                        <i class="material-icons">lock_open</i>
                                 </label>
 				<input type="text" name="new_pw"  id="new_pw" value=<?=$new_pw?> required>
                                 <label for="new_pw1">
-                                        <i class="fas fa-lock"></i>
+                                        <i class="material-icons">lock</i>
                                 </label>
                                 <input type="password" name="new_pw1" placeholder="New password .. again" id="new_pw1" required>
                                 <input type="submit">

@@ -21,13 +21,30 @@ function init(){
 				<label for="username">
 					<i class="material-icons">account_box</i>
 				</label>
-				<input type="text" name="username" placeholder="Username" id="username" autocomplete="off" required>
+				<input type="text" name="username" placeholder="Username" id="username" autocomplete="off">
 				<label for="password">
 					<i class="material-icons">lock</i>
 				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="submit">
+				<input type="password" name="password" placeholder="Password" id="password">
+				<input type="submit" name="submit">
 			</form>
+			<?php
+				if (!isset($_GET["login"])) {
+					exit();
+				} else {
+					$logincheck=$_GET["login"];
+					if ($logincheck == "empty") {
+						echo "<p class='error'>You did not fill in all fields!</p>";
+						exit();
+					} elseif ($logincheck == "userpasscheck") {
+						echo "<p class='error'>Username or password incorrect</p>";
+						exit();
+					} elseif ($logincheck == "prepare") {
+						echo "<p class='error'>something went wrong with the SQL prepare</p>";
+						exit();
+					}
+				}
+			?>
 		</div>
 	</body>
 </html>

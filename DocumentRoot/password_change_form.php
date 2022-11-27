@@ -20,7 +20,7 @@ $new_pw = generate_password();
 ?>
 <!DOCTYPE html>
 <html>
-	<head>
+        <head>
 		<meta charset="utf-8">
 		<title>Password_change</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -31,25 +31,45 @@ $new_pw = generate_password();
         <?php require_once(__DIR__.'/sidebar.php'); ?> -->
 		<div class="login">
 <!--		<div class="content"> -->
-			<h1>Password change</h1>
-			<p>Welcome back, <?=$_SESSION['name']?></p>
-			<p>Your password expired on, <?=$_SESSION['password_expiry']?></p>
+			<h1>Safe Management System (SMS) v0.1</h1>
+			<p>Welcome back, <b><?=$_SESSION['name']?></b> your password expired on <b><?=$_SESSION['password_expiry']?></b></p>
+            <p>You are required to change it now.</p>
 <!--		</div> -->
                 <form action="password_change_script.php" method="post" name="pwchange">
                                 <label for="old_pw">
                                         <i class="material-icons">lock</i>
                                 </label>
-                                <input type="password" name="old_pw" placeholder="Old password" id="old_pw" required>
+                                <input type="password" name="old_pw" placeholder="Old password" id="old_pw">
                                 <label for="new_pw">
                                         <i class="material-icons">lock_open</i>
                                 </label>
-				<input type="text" name="new_pw"  id="new_pw" value=<?=$new_pw?> required>
+				<input type="text" name="new_pw"  id="new_pw" value=<?=$new_pw?>>
                                 <label for="new_pw1">
                                         <i class="material-icons">lock</i>
                                 </label>
-                                <input type="password" name="new_pw1" placeholder="New password .. again" id="new_pw1" required>
-                                <input type="submit">
+                                <input type="password" name="new_pw1" placeholder="New password .. again" id="new_pw1">
+                                <input type="submit" name="submit">
                 </form>
+                <?php
+                    if (!isset($_GET["pwchange"])) {
+                        exit();
+                    } else {
+                        $logincheck=$_GET["pwchange"];
+                        if ($logincheck == "empty") {
+                            echo "<p class='error'>Please fill in all fields</p>";
+                            exit();
+                        } elseif ($logincheck == "newpwmatch") {
+                            echo "<p class='error'>Both new passwords entered do not match</p>";
+                            exit();
+                        } elseif ($logincheck == "newpwq") {
+                            echo "<p class='error'>Password quality of new password is not upto snuff</p>";
+                            exit();
+                        } elseif ($logincheck == "oldpw"){
+                            echo "<p class='error'>Unable to verify old password</p>";
+                            exit();
+                        }
+                    }
+                ?>
 		</div>
 	</body>
 </html>

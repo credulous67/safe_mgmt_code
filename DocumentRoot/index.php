@@ -33,16 +33,27 @@ function init(){
 					exit();
 				} else {
 					$logincheck=$_GET["login"];
-					if ($logincheck == "empty") {
-						echo "<p class='error'>Please fill in both username and password</p>";
-						exit();
-					} elseif ($logincheck == "userpasscheck") {
-						echo "<p class='error'>Username or password incorrect</p>";
-						exit();
-					} elseif ($logincheck == "prepare") {
-						echo "<p class='error'>something went wrong with the SQL prepare</p>";
-						exit();
-					}
+					if (isset ($logincheck)) {
+                        if ($logincheck == "empty") {
+                            echo "<p class='error'>Please fill in both username and password</p>";
+                            exit();
+                        } elseif ($logincheck == "userpasscheck") {
+                            echo "<p class='error'>Username or password incorrect</p>";
+                            exit();
+                        } elseif ($logincheck == "prepare") {
+                            echo "<p class='error'>something went wrong with the SQL prepare</p>";
+                            exit();
+                        } elseif ($logincheck == "pwupdatefailed"){
+                            echo "<p class='error'>Unable to update expired password, try again</p>";
+                            exit();
+                        } elseif ($logincheck == "pwupdatesuccess"){
+                            echo "<p class='success'>Password changed successfully, please login</p>";
+                            exit();
+                        } else {
+                            exit();
+                        }
+                    }
+                   
 				}
 			?>
 		</div>

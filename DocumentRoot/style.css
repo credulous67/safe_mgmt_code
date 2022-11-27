@@ -59,6 +59,9 @@ body {
 	background-color: #2868c7;
   	transition: background-color 0.2s;
 }
+.login p {
+    padding: 10px;
+}
 
 .navtop {
 	background-color: #2f3947;
@@ -259,7 +262,7 @@ font-size: 18px;
 	text-align: center;
   }
 .success{
-	color:lawngreen;
+	color:green;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	font-size: 24px;

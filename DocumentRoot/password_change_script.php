@@ -5,7 +5,7 @@ if (!isset($_POST["submit"])) {
 	exit();
 } else {
 	session_start();
-	include './config.php';
+	include './config.inc.php';
 	// If the user is not logged ($_POST['loggedin']=FALSE (ie TRUE), then drop back to main index, as user shouldn't be here)
 	if ($_SESSION['loggedin']) {
 		header("Location: ./index.php");

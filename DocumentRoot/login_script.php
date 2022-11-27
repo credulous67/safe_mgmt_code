@@ -4,10 +4,8 @@ if (!isset($_POST["submit"])) {
 	header("Location: ./index.php"); 
 	exit();
 } else {
-	# User submitted from login page
 	session_start();
-	// Change this to your connection info.
-	include "./config.php";
+	include "./config.inc.php";
 	if ( empty($_POST["username"]) || empty($_POST["password"]) ) {
 		# either empty username or password
 		header("Location: ./index.php?login=empty");

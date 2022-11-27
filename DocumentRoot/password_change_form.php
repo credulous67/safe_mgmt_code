@@ -27,10 +27,7 @@ $new_pw = generate_password();
 		<link href="style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body onload="document.pwchange.old_pw.focus()";>
-<!--        <?php require_once(__DIR__.'/navtop.php'); ?>
-        <?php require_once(__DIR__.'/sidebar.php'); ?> -->
 		<div class="login">
-<!--		<div class="content"> -->
 			<h1>Safe Management System (SMS) v0.1</h1>
 			<p>Welcome back, <b><?=$_SESSION['name']?></b> your password expired on <b><?=$_SESSION['password_expiry']?></b></p>
             <p>You are required to change it now.</p>

@@ -23,8 +23,8 @@ if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we e
 <!--		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> -->
 	</head>
 	<body class="loggedin">
-	<?php require_once(__DIR__.'/navtop.php'); ?>
-	<?php require_once(__DIR__.'/sidebar.php'); ?>
+	<?php require_once(__DIR__.'/navtop.html'); ?>
+	<?php require_once(__DIR__.'/sidebar.html'); ?>
 		<div class="content">
 			<p>Welcome back, <?=$_SESSION['name']?>!</p>
 		</div>

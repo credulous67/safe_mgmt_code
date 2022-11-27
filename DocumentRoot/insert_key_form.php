@@ -41,8 +41,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <link href="style.css" rel="stylesheet" type="text/css">
         </head>
         <body class="loggedin">
-                <?php require_once(__DIR__.'/navtop.php'); ?>
-                <?php require_once(__DIR__.'/sidebar.php'); ?>
+                <?php require_once(__DIR__.'/navtop.html'); ?>
+                <?php require_once(__DIR__.'/sidebar.html'); ?>
                 <div class="content">
                         <h2>Insert new key</h2>
                         <div class="container">
@@ -73,8 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <link href="style.css" rel="stylesheet" type="text/css">
         </head>
         <body class="loggedin">
-                <?php require_once(__DIR__.'/navtop.php'); ?>
-                <?php require_once(__DIR__.'/sidebar.php'); ?>
+                <?php require_once(__DIR__.'/navtop.html'); ?>
+                <?php require_once(__DIR__.'/sidebar.html'); ?>
                 <div class="content">
                         <h2>Insert new key</h2>
                         <div class="container">

@@ -252,14 +252,16 @@ font-size: 18px;
 .bold-red { color:red; font-weight:bold; }
 
 .error {
-	color: #ff047f;
-	margin-top: 20px;
+	color: red;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	font-size: 24px;
 	text-align: center;
   }
 .success{
 	color:lawngreen;
-	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	font-size: 24px;
 	text-align: center;
 }

@@ -23,13 +23,21 @@ if (!isset($_POST["submit"])) {
 			$stmt->execute();
 			// Store the result so we can check if the account exists in the database.
 			$stmt->store_result();
-			if ($stmt->num_rows > 0) {
+			if ($stmt->num_rows == 0) {
+				// User not found
+				header("Location: ./index.php?login=userpasscheck");
+				exit();
+			} elseif ($stmt->num_rows == 1) {
 				$stmt->bind_result($id, $password, $password_expiry);
 				$stmt->fetch();
-				// Account exists, now we verify the password.
+				// Only 1 account exists, now we verify the password.
 				$now=date("Y-m-d H:i:s");
-				if (password_verify($_POST['password'], $password) && $password_expiry <= $now ) {
-					// Verification success! But password has expired
+				if (!password_verify($_POST['password'], $password)) {
+					// Incorrect password
+					header("Location: ./index.php?login=userpasscheck");
+					exit();
+				} elseif ($password_expiry <= $now) {
+					// User authenticated, but account expired
 					// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
 					session_regenerate_id();
 					$_SESSION['loggedin'] = FALSE;
@@ -39,7 +47,8 @@ if (!isset($_POST["submit"])) {
 					$_SESSION['last_activity'] = time();
 					$_SESSION['expire_time'] = $TIMEOUT_SESSION * 60;
 					header('Location: password_change_form.php');
-				} elseif (password_verify($_POST['password'], $password) && $password_expiry > $now ) {
+					exit();
+				} else {
 					// Verification success! User has logged-in!
 					// Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
 					session_regenerate_id();
@@ -50,13 +59,10 @@ if (!isset($_POST["submit"])) {
 					$_SESSION['last_activity'] = time();
 					$_SESSION['expire_time'] = $TIMEOUT_SESSION * 60;
 					header('Location: main_menu.php');
-				} else {
-					// Incorrect password
-					header("Location: ./index.php?login=userpasscheck");
 					exit();
 				}
 			} else {
-				// Incorrect username
+				// Multiple users found
 				header("Location: ./index.php?login=userpasscheck");
 				exit();
 			}

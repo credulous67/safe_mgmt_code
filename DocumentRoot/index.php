@@ -16,7 +16,7 @@ function init(){
 	</head>
 	<body onload="document.login.username.focus()";>
 		<div class="login">
-			<h1>Safe Management Login</h1>
+			<h1>Safe Management System (SMS) v0.1</h1>
 			<form action="login_script.php" method="post" name="login">
 				<label for="username">
 					<i class="material-icons">account_box</i>
@@ -34,7 +34,7 @@ function init(){
 				} else {
 					$logincheck=$_GET["login"];
 					if ($logincheck == "empty") {
-						echo "<p class='error'>You did not fill in all fields!</p>";
+						echo "<p class='error'>Please fill in both username and password</p>";
 						exit();
 					} elseif ($logincheck == "userpasscheck") {
 						echo "<p class='error'>Username or password incorrect</p>";

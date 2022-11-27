@@ -10,7 +10,6 @@ function init(){
 	<head>
 		<meta charset="utf-8">
 		<title>Login</title>
-		<!--                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
                 <link href="style.css" rel="stylesheet" type="text/css">
 	</head>
@@ -48,6 +47,9 @@ function init(){
                             exit();
                         } elseif ($logincheck == "pwupdatesuccess"){
                             echo "<p class='success'>Password changed successfully, please login</p>";
+                            exit();
+                        } elseif ($logincheck == "sessiontimedout") {
+                            echo "<p class='success'>Session timed out, please login</p>";
                             exit();
                         } else {
                             exit();

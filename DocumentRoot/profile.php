@@ -1,18 +1,6 @@
 <?php
-// We need to use sessions, so you should always start sessions using the below code.
-session_start();
-// If the user is not logged in redirect to the login page...
-if ($_SESSION['loggedin'] == FALSE) {
-	header('Location: index.php');
-	exit;
-}
-if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we expired?
-    //redirect to logout.php
-    header('Location: logout.php'); //change yoursite.com to the name of you site!!
-} else{ //if we haven'jt expired:
-    $_SESSION['last_activity'] = time(); //this was the moment of last activity.
-}
-include './config.php';
+include './session.inc.php';
+include './config.inc.php';
 // We don't have the password or email info stored in sessions so instead we can get the results from the database.
 $stmt = $con->prepare('SELECT password, email FROM user_accounts WHERE id = ?');
 // In this case we can use the account ID to get the account info.
@@ -29,7 +17,6 @@ $stmt->close();
 		<title>Profile Page</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link href="style.css" rel="stylesheet" type="text/css">
-<!--		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"> -->
 	</head>
 	<body class="loggedin">
 		<nav class="navtop">

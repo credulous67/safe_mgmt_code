@@ -169,10 +169,7 @@ body.loggedin {
 }
 .sidebar div a:hover {
         color: #eaebed;
-}
-.sidebar div h1:hover {
-        color: #cce6ff;
-}
+
 
  /* Style inputs, select elements and textareas */
 input[type=text], select, textarea{

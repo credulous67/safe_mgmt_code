@@ -29,18 +29,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <link href="style.css" rel="stylesheet" type="text/css">
         </head>
         <body class="loggedin">
-                <?php require_once(__DIR__.'/navtop.inc.html'); ?>
-                <?php require_once(__DIR__.'/sidebar.inc.html'); ?>
-                <div class="content">
-                        <h2>Insert new key</h2>
-                        <div class="container">
+            <nav class="navtop">
+                <div>
+                    <h1>Safe Management System</h1>
+                    <a href="main_menu.php"><i class="material-icons">signpost</i>Main menu</a>
+                    <a href="logout.php"><i class="material-icons">exit_to_app</i>Logout</a>
+                </div>
+            </nav>
+            <?php require_once(__DIR__.'/sidebar.inc.html'); ?>
+            <div class="content">
+                    <h2>Insert new key</h2>
+                    <div class="container">
 
-                        <h2>Insert new key</h2>
-                        <p>New key successfully added to the database</p>
-                        <p>ID:<?=$new_key_id?></p>
-                        <p>SHA256 HASH:<?=$sha256_hash?></p>
-                        <p>SHA1 HASH:<?=$sha1_hash?></p>
-                        <p>KEYSTRING:<?=$keystring?></p>
+                    <h2>Insert new key</h2>
+                    <p>New key successfully added to the database</p>
+                    <p>ID:<?=$new_key_id?></p>
+                    <p>SHA256 HASH:<?=$sha256_hash?></p>
+                    <p>SHA1 HASH:<?=$sha1_hash?></p>
+                    <p>KEYSTRING:<?=$keystring?></p>
 <?php
 //	echo "<script> alert('New item added to database')</script>";
 //	header('Location: insert_key_form.php');
@@ -61,13 +67,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <link href="style.css" rel="stylesheet" type="text/css">
         </head>
         <body class="loggedin">
-                <?php require_once(__DIR__.'/navtop.inc.html'); ?>
-                <?php require_once(__DIR__.'/sidebar.inc.html'); ?>
-                <div class="content">
-                        <h2>Insert new key</h2>
-                        <div class="container">
-
-
+            <nav class="navtop">
+                <div>
+                    <h1>Safe Management System</h1>
+                    <a href="main_menu.php"><i class="material-icons">signpost</i>Main menu</a>
+                    <a href="logout.php"><i class="material-icons">exit_to_app</i>Logout</a>
+                </div>
+            </nav>
+            <?php require_once(__DIR__.'/sidebar.inc.html'); ?>
+            <div class="content">
+                    <h2>Insert new key</h2>
+                    <div class="container">
 <!--	                <form class="form-inline" action="insert_key_script.php" method="post"> -->
 			<form class="form-inline" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<div class="row">

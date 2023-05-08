@@ -21,9 +21,9 @@ $stmt->close();
 	<body class="loggedin">
 		<nav class="navtop">
 			<div>
-				<h1>Encryption Services safe management</h1>
-				<a href="main_menu.php"><i class="fas fa-map-signs"></i>Main menu</a>
-				<a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
+				<h1>Safe Management System</h1>
+				<a href="main_menu.php"><i class="material-icons">signpost</i>Main menu</a>
+				<a href="logout.php"><i class="material-icons">exit_to_app</i>Logout</a>
 			</div>
 		</nav>
 		<div class="content">

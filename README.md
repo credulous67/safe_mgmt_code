@@ -1,6 +1,12 @@
 # Safe Management System (SMS)
 This is a web based application to manage safes and their contents to satisfy PCI DSS and PCI PIN Security requirements
 
+I have now split out the php code and the docker-compose / k8s deployment parts into separated repo's
+This is primarily to allow for easier deployment to Kubernetes using an init container
+to git clone the php code
+
+This will need  subsequent changes to the docker-compose deployment as well
+
 ## To start containers
 ```
 cd ~/docker/safe_mgmt

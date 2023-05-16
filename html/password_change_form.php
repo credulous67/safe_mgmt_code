@@ -13,7 +13,7 @@ if( $_SESSION['last_activity'] < time()-$_SESSION['expire_time'] ) { //have we e
 } else{ //if we haven'jt expired:
     $_SESSION['last_activity'] = time(); //this was the moment of last activity.
 }
-include './config.php';
+include './config.inc.php';
 include './functions.php';
 $new_pw = generate_password();
 

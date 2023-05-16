@@ -1,5 +1,5 @@
 <?php
-$DATABASE_HOST = 'mariadb';
+$DATABASE_HOST = 'mariadb-service';
 $DATABASE_USER = '_svc_sm';
 $DATABASE_PASS = 'smpass';
 $DATABASE_NAME = 'safe_mgmt';
